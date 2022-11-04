@@ -43,6 +43,21 @@ export default function App() {
     }
   };
 
+  const getClientesPorId = async (id) => {
+    setLoading(true);
+    try {
+      const url = `http://172.16.61.225:3000/api/${id}`;
+      const response = await axios.get(url);
+      setData(response.data);
+      setNombre(response.data.nombre);
+      setApellidos(response.data.apellidos);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const saveCliente = async () => {
     if (!nombre.trim() || !apellidos.trim()) {
       alert("Nombre y apellidos inválido");
